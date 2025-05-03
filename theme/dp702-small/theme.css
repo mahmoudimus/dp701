@@ -1,4 +1,3 @@
-
 /*
 	dp701 theme for IDA Pro
 	Inspired by Visual Studio theme
@@ -168,8 +167,14 @@ QMenu {
   background: #1b1b1c;
 }
 
+QMenu::icon {
+  padding-left: 2px;
+}
+
 QMenu::item {
-  padding: 2px auto 2px auto;
+  /* margin: 5px; (makes it way too spaced) */
+  padding: 3px 3px;
+  min-width: 150px;
 }
 
 QMenu::item:disabled {
@@ -179,6 +184,7 @@ QMenu::item:disabled {
 
 QMenu::item:selected {
   background-color: #333333;
+  outline-style: dashed;
 }
 
 QMenu::separator {
@@ -397,10 +403,9 @@ QComboBox QAbstractItemView::item {
   width: 16px;
 }
 
-QComboBox QAbstractItemView::item: !enabled {
+QComboBox QAbstractItemView::item:!enabled {
   color: #656565;
 }
-
 QComboBox QAbstractItemView::disabled {
   color: #656565;
 }
@@ -480,7 +485,7 @@ QScrollBar::handle:pressed {
   background: #efebef;
 }
 
-QScrollBar::handle: !enabled {
+QScrollBar::handle:!enabled {
   background: #3e3e42;
 }
 
@@ -505,7 +510,7 @@ QScrollBar:down-arrow:pressed {
   image: url("$RELPATH/images/arrow-down-pressed.png");
 }
 
-QScrollBar:down-arrow: !enabled {
+QScrollBar:down-arrow:!enabled {
   image: url("$RELPATH/images/arrow-down-disabled.png");
 }
 
@@ -521,7 +526,7 @@ QScrollBar:up-arrow:pressed {
   image: url("$RELPATH/images/arrow-up-pressed.png");
 }
 
-QScrollBar:up-arrow: !enabled {
+QScrollBar:up-arrow:!enabled {
   image: url("$RELPATH/images/arrow-up-disabled.png");
 }
 
@@ -537,7 +542,7 @@ QScrollBar:left-arrow:pressed {
   image: url("$RELPATH/images/arrow-left-pressed.png");
 }
 
-QScrollBar:left-arrow: !enabled {
+QScrollBar:left-arrow:!enabled {
   image: url("$RELPATH/images/arrow-left-disabled.png");
 }
 
@@ -553,7 +558,7 @@ QScrollBar:right-arrow:pressed {
   image: url("$RELPATH/images/arrow-right-pressed.png");
 }
 
-QScrollBar:right-arrow: !enabled {
+QScrollBar:right-arrow:!enabled {
   image: url("$RELPATH/images/arrow-right-disabled.png");
 }
 
@@ -674,9 +679,8 @@ MainMsgList {
   color: #f1f1f1;
   background-color: #252525;
 }
-
 /* Source syntax */
-TextEdit {
+text_area_t {
   qproperty-keyword1-fg: #d8a0df;
   qproperty-keyword1-weight: 0;
   qproperty-keyword1-italic: 0;
@@ -695,7 +699,6 @@ TextEdit {
   property-number-weight: 0;
   property-number-italic: 0;
 }
-
 text_area_t QWidget {
   background-color: transparent;
 }
@@ -790,7 +793,6 @@ CustomIDAMemo {
   /* extra colors */
   qproperty-line-bgovl-extra-13: rgba(107, 74, 156, 0.4);
 }
-
 CustomIDAMemo[debugging="true"] {
   qproperty-line-bgovl-current-ip: rgba(80, 160, 255, 0.2);
   qproperty-line-bg-default: #001f33;
@@ -799,11 +801,9 @@ CustomIDAMemo[debugging="true"] {
   qproperty-line-fg-numlit-in-data: #a9e8a3;
   qproperty-line-fg-numlit-in-insn: #b8e8a3;
 }
-
 CustomIDAMemo[hints="true"] {
   qproperty-line-bg-default: #333333;
 }
-
 /* dasm jump arrows */
 TextArrows {
   qproperty-jump-in-function: #b8d7a3;
@@ -812,7 +812,6 @@ TextArrows {
   qproperty-jump-target: #333334;
   qproperty-register-target: #333334;
 }
-
 /* registers */
 TCpuRegs {
   background-color: #001f33;
@@ -821,26 +820,21 @@ TCpuRegs {
   qproperty-register-edited: #ffd68f;
   qproperty-register-unavailable: #d85050;
 }
-
 TCpuRegs QPushButton {
   background: transparent;
 }
-
 TCpuRegs QPushButton:hover {
   background: #b8e8a3;
   color: #656565;
 }
-
 tcpuregsQPushButton: !enabled {
   background: transparent;
   color: #656565;
 }
-
 TCpuRegs IDALabel {
   font-style: inherit;
   color: #fdfdfd;
 }
-
 /* Navigation band */
 navband_t {
   qproperty-lib-function: #9cdcfe;
@@ -855,46 +849,64 @@ navband_t {
   qproperty-auto-analysis-cursor: #ffaa00;
   qproperty-lumina-function: #46a34c;
 }
-
 AskText QLabel#counterlabel[invalid="true"] {
   color: green;
 }
 
-/* 
+/*
  Block for personalization
 */
 
 QWidget {
-  font-family: "Segoe UI";
+  font-family: "Segoe UI", "SF Pro Text", "Inter", "SF Pro Display";
   font-size: 8pt;
 }
 
-/*
-DockWidgetTitle, IDAMainWindow, QStatusBar, QMenu, QMenuBar, QTabBar,
-QLineEdit, QComboBox, QPushButton, QHeaderView, QTreeView, QListView, QTableView,
-QStatusBar QLabel
-{
-	font-family: "Segoe UI" !important;
-	font-size: 9pt !important;
-}*/
+DockWidgetTitle,
+IDAMainWindow,
+QStatusBar,
+QMenu,
+QMenuBar,
+QTabBar,
+QLineEdit,
+QComboBox,
+QPushButton,
+QHeaderView,
+QTreeView,
+QListView,
+QTableView,
+QStatusBar QLabel {
+  font-family: "Adelle Sans EXT", "Segoe UI", "SF Pro Text", "Inter" !important;
+  font-size: 8pt !important;
+}
 
 /* fix reg fonts with custom fonts */
 TCpuRegs QLabel {
-  font-family: "Consolas", "Microsoft YaHei Mono";
-  font-size: 9pt;
+  font-family: "Fira Code Retina", "Ubuntu Mono", "Operator Mono",
+    "Adelle Mono Flex";
+  font-size: 8pt;
 }
 
 QTabWidget::tab {
   font-size: 8pt;
 }
 
+text_area_t {
+  qproperty-keyword1-fg: #5555ff;
+  qproperty-keyword2-fg: #ffaa00;
+  qproperty-keyword3-fg: #aa55ff;
+  qproperty-string-fg: #00aa00;
+  qproperty-comment-fg: #ffff7f;
+  qproperty-preprocessor-fg: #c88599;
+}
+
 /* Reserved  */
 CustomIDAMemo,
-EditContainerб,
+EditContainer,
 IDAView,
 hexview_t,
 MainMsgList {
-  font-family: "Consolas", "Microsoft YaHei Mono";
+  font-family: "Ubuntu Mono", "Consolas", "Microsoft YaHei Mono";
   font-size: 9pt;
   /* font-size: <TEXT_INPUT_FONT_SIZE>; */
   /* font-style: <TEXT_INPUT_FONT_STYLE>; */
